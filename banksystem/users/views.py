@@ -45,14 +45,16 @@ def login_page(request):
 
         if username and password:
             user = authenticate(request, username=username, password=password)
-            print(user)
+
             if user is not None:
                 login(request, user)
+
                 return redirect('home/')
-            else:
-                return HttpResponse('Invalid username or password')
-        else:
-            return HttpResponse('Please provide both username and password')
+
+            return HttpResponse('Invalid username or password')
+
+        return HttpResponse('Please provide both username and password')
+
     return render(request, 'login.html')
 
 
