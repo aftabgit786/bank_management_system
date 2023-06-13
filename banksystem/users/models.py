@@ -29,7 +29,6 @@ class CustomUser(AbstractUser):
     city = models.CharField(max_length=150)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    # Add any additional fields as per your requirements
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
