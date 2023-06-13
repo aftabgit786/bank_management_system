@@ -26,7 +26,7 @@ def signup_page(request):
 
             return HttpResponse('Passwords do not match')
 
-        user = User(first_name=firstname, last_name=lastname, username=username, email=email,
+        user = User(firstname=firstname, lastname=lastname, username=username, email=email,
                     password=password, password_confirmation=password_confirmation, dob=dob, city=city)
         user.save()
 
