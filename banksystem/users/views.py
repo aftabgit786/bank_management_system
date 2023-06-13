@@ -1,7 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, HttpResponse, redirect
+from django.contrib.auth import get_user_model
 
-from .models import User
+
+User = get_user_model()
 
 
 def signup_page(request):
@@ -26,8 +28,9 @@ def signup_page(request):
 
             return HttpResponse('Passwords do not match')
 
-        user = User(firstname=firstname, lastname=lastname, username=username, email=email,
-                    password=password, password_confirmation=password_confirmation, dob=dob, city=city)
+        user = User.objects.create_user(firstname=firstname, lastname=lastname, username=username, email=email,
+                                        password=password, password_confirmation=password_confirmation, dob=dob,
+                                        city=city)
         user.save()
 
         return redirect('login/')
@@ -41,17 +44,18 @@ def login_page(request):
         password = request.POST.get("password")
 
         if username and password:
-
             user = authenticate(request, username=username, password=password)
-            login(request, user)
-
-            return redirect('home/')
-
-        return HttpResponse('Invalid username or password')
-
+            print(user)
+            if user is not None:
+                login(request, user)
+                return redirect('home/')
+            else:
+                return HttpResponse('Invalid username or password')
+        else:
+            return HttpResponse('Please provide both username and password')
     return render(request, 'login.html')
 
 
-def index(request):
+def home(request):
 
     return HttpResponse('Welcome to the user profile')
