@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bank Signup</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <form method="post" action="">
+            {% csrf_token %}
+            <h1>Create an Account</h1>
+            <input type="text" placeholder="First Name" name="firstname">
+            <input type="text" placeholder="Last Name" name="lastname">
+            <input type="text" placeholder="Username" name="username">
+            <input type="password" placeholder="Password" name="password">
+            <input type="text" placeholder="City" name="city">
+            <input type="date" placeholder="Date of Birth" name="dob">
+            <input type="email" placeholder="Email Address" name="email">
+            <button type="submit">Sign Up</button>
+            <p><a href="/login">Already have an account? Log in</a></p>
+        </form>
+    </div>
+</body>
+
+</html>
