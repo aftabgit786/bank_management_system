@@ -17,6 +17,7 @@ def signup_page(request):
         city = request.POST.get('city', '')
 
         if all([firstname, lastname, username, password, email, dob, city]):
+
             user = User.objects.create_user(
                 first_name=firstname,
                 last_name=lastname,
