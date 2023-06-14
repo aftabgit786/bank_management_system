@@ -56,5 +56,4 @@ def login_page(request):
 
 
 def home(request):
-
     return HttpResponse('Welcome to the user profile')
