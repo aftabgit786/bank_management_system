@@ -56,6 +56,6 @@ def login_page(request):
 
 
 def details(request, bank):
-    user_data = User.objects.all()
+    data = User.objects.all()
 
-    return render(request, 'details.html', {'user_data': user_data})
+    return render(request, 'details.html', {'user_data': data})
