@@ -1,5 +1,5 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 
 
-def index(request):
-    return HttpResponse('Welcome to the Account')
+def accounts(request):
+    return render(request, 'accounts.html')

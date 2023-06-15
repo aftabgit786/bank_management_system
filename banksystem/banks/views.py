@@ -1,5 +1,8 @@
 from django.shortcuts import render, HttpResponse
 
+from .models import Bank
 
-def index(request):
-    return HttpResponse('Welcome to the Bank')
+
+def banks(request):
+    bank = Bank.objects.all()
+    return render(request, 'bank.html', {'banks': bank})

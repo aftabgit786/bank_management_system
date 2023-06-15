@@ -29,7 +29,7 @@ def signup_page(request):
             )
             user.save()
 
-            return redirect('login/')
+            return redirect('login')
         return HttpResponse('Please provide all fields')
 
     return render(request, 'signup.html')
@@ -46,7 +46,7 @@ def login_page(request):
             if user is not None:
                 login(request, user)
 
-                return redirect('home/')
+                return redirect('banks')
 
             return HttpResponse('Invalid username or password')
 
@@ -55,5 +55,7 @@ def login_page(request):
     return render(request, 'login.html')
 
 
-def home(request):
-    return HttpResponse('Welcome to the user profile')
+def details(request, bank):
+    user_data = User.objects.all()
+
+    return render(request, 'details.html', {'user_data': user_data})
