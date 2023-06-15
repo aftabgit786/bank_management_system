@@ -1,5 +1,9 @@
 from django.shortcuts import render
 
+from .models import Account
+
 
 def accounts(request):
-    return render(request, 'accounts.html')
+    data = Account.objects.all()
+
+    return render(request, 'accounts.html', {'accounts': data})
