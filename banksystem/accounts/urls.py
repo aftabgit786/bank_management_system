@@ -1,8 +1,7 @@
 from django.urls import path
-
-from . import views
+from .views import accounts
 
 
 urlpatterns = [
-    path('', views.accounts, name='accounts'),
+    path('<str:bank_name>/', accounts, name='bank-accounts'),
 ]

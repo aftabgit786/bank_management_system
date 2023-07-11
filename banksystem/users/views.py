@@ -30,6 +30,7 @@ def signup_page(request):
             user.save()
 
             return redirect('login')
+
         return HttpResponse('Please provide all fields')
 
     return render(request, 'signup.html')
@@ -53,9 +54,3 @@ def login_page(request):
         return HttpResponse('Please provide both username and password')
 
     return render(request, 'login.html')
-
-
-def details(request, bank):
-    data = User.objects.all()
-
-    return render(request, 'details.html', {'user_data': data})
