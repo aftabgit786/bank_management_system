@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Bank Details</title>
 </head>
-
 <body>
     <h1>You Have These Bank Accounts</h1>
         {% for bank in banks %}
             <h1>
-                <a href="/accounts/{{ bank.name }}/">{{ bank.name }}</a>
+                <a href="{% url 'accounts' bank_id=bank.id %}">{{ bank.name }}</a>
             </h1>
         {% endfor %}
 </body>
-
 </html>

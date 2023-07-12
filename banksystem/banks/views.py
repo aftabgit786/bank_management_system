@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from .models import Bank
+from .models import Banks
 
 
-def banks(request):
+def get_banks(request):
     user = request.user
-    user_banks = Bank.objects.filter(bank_accounts__user=user)
+    user_banks = Banks.objects.filter(bank_accounts__user=user).distinct()
 
-    return render(request, 'bank.html', {'banks': user_banks})
+    return render(request, 'banks.html', {'banks': user_banks})

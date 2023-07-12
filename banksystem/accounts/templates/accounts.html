@@ -2,16 +2,22 @@
 <html>
 
 <head>
-    <title>Accounts</title>
+    <title>Bank Accounts</title>
 </head>
 
 <body>
-    <h4>Your Bank Account Details</h4>
-    <p>Account No.: {{ account.0.number }}</p>
-    <p>Name: {{ account.0.user.username }}</p>
-    <p>City: {{ account.0.user.city }}</p>
-    <p>Balance: {{ account.0.balance }}</p>
-    <p>Account created on: {{ account.0.created_at }}</p>
+    <h2>You have total accounts in this bank: {{ total_accounts }}</h2>
+    {% for account in accounts %}
+        <h4>Details of account : {{ forloop.counter }}</h4>
+        <p>Username: {{ account.user.username }}</p>
+        <p>Account No.: {{ account.number }}</p>
+        <p>Type: {{ account.type }}</p>
+        <p>Balance: {{ account.balance }}</p>
+        <p>Bank branch: {{ account.bank.city }}</p>
+        <p>Account created on: {{ account.created_at }}</p>
+        <hr>
+    {% endfor %}
+
 </body>
 
 </html>

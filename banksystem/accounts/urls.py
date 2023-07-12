@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import accounts
+from .views import get_bank_accounts
 
 
 urlpatterns = [
-    path('<str:bank_name>/', accounts, name='accounts'),
+    path('<int:bank_id>/', get_bank_accounts, name='accounts'),
 ]
