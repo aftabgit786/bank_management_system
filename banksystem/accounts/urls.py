@@ -3,5 +3,5 @@ from .views import accounts
 
 
 urlpatterns = [
-    path('<str:bank_name>/', accounts, name='bank-accounts'),
+    path('<str:bank_name>/', accounts, name='accounts'),
 ]
