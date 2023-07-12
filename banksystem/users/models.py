@@ -5,3 +5,6 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     dob = models.DateField(null=True)
     city = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.username
