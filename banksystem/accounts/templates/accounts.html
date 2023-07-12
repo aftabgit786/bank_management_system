@@ -6,14 +6,12 @@
 </head>
 
 <body>
-    <h4>Your {{ accounts.0.bank.name }} Bank Account Details</h4>
-    {% for account in accounts %}
-        <p>Account No.: {{ account.number }}</p>
-        <p>Name: {{ account.user.username }}</p>
-        <p>City: {{ account.user.city }}</p>
-        <p>Balance: {{ account.balance }}</p>
-        <p>Account created on: {{ account.created_at }}</p>
-    {% endfor %}
+    <h4>Your {{ account.0.bank.name }} Bank Account Details</h4>
+    <p>Account No.: {{ account.0.number }}</p>
+    <p>Name: {{ account.0.user.username }}</p>
+    <p>City: {{ account.0.user.city }}</p>
+    <p>Balance: {{ account.0.balance }}</p>
+    <p>Account created on: {{ account.0.created_at }}</p>
 </body>
 
 </html>

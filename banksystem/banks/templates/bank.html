@@ -7,13 +7,11 @@
 
 <body>
     <h1>You Have These Bank Accounts</h1>
-    <ul>
         {% for bank in banks %}
             <h1>
                 <a href="/accounts/{{ bank.name }}/">{{ bank.name }}</a>
             </h1>
         {% endfor %}
-    </ul>
 </body>
 
 </html>
