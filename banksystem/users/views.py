@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, HttpResponse, redirect
 
-from .models import Users
+from .models import User
 
 
 def signup_page(request):
@@ -18,7 +18,7 @@ def signup_page(request):
 
         if all([firstname, lastname, username, password, email, dob, city]):
 
-            user = Users.objects.create_user(
+            user = User.objects.create_user(
                 first_name=firstname,
                 last_name=lastname,
                 username=username,

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Banks
+from .models import Bank
 
 
-admin.site.register(Banks)
+admin.site.register(Bank)
