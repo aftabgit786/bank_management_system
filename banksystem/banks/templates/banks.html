@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>You Have These Bank Accounts</h1>
-    <h3>You Have {{ total_account }} Total accounts in these banks</h3>
+    <h3>You Have Total {{ total_account }} accounts in these banks</h3>
         {% for bank in banks %}
             <h1>
                 <a href="{% url 'accounts' bank_id=bank.id %}">{{ bank.name }}</a>
