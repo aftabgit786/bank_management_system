@@ -5,11 +5,10 @@
 </head>
 <body>
     <h1>You Have These Bank Accounts</h1>
-    <h3>You Have Total accounts in these banks: {{ total_accounts }}</h3>
-        {% for bank in banks %}
-            <h1>
-                <a href="{% url 'accounts' bank_id=bank.id %}">{{ bank.name }}</a>
-            </h1>
-        {% endfor %}
+    {% for bank in banks %}
+        <h2>{{ bank.name }} ({{ bank.accounts_count }} Accounts)</h2>
+        <button><a href="{% url 'accounts' bank_id=bank.id %}">Details</a></button>
+
+    {% endfor %}
 </body>
 </html>
