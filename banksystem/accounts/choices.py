@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class Types(models.TextChoices):
+class AccountType(models.TextChoices):
     CURRENT = "CA", _("Current")
     SAVINGS = "SA", _("Savings")
     LOAN = "L", _("Loan")

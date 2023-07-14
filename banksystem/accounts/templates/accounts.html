@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Accounts Details</title>
+</head>
+
+<body>
+    <h2>You have total accounts in this bank: {{ total_accounts }}</h2>
+    {% for account in accounts %}
+        <h4>Details of account : {{ forloop.counter }}</h4>
+        <p>Username: {{ account.user.username }}</p>
+        <p>Account No.: {{ account.number }}</p>
+        <p>Type: {{ account.type }}</p>
+        <p>Balance: {{ account.balance }}</p>
+        <p>Bank branch: {{ account.bank.city }}</p>
+        <p>Account created on: {{ account.created_at }}</p>
+        <hr>
+    {% endfor %}
+
+</body>
+
+</html>
