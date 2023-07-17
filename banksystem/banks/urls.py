@@ -1,8 +1,9 @@
 from django.urls import path
 
-from . import views
+from .views import *
 
 
 urlpatterns = [
-    path('', views.GetBanks.as_view(), name='banks'),
+    path('class', GetBanks.as_view(), name='banks-class'),
+    path('function', get_banks, name='banks-function'),
 ]

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Banks Details</title>
+</head>
+<body>
+    <h1>You Have These Bank Accounts</h1>
+    {% for bank in banks %}
+        <h2>{{ bank.name }} ({{ bank.accounts_count }} Accounts)</h2>
+        <button><a href="{% url 'accounts-class' bank_id=bank.id %}">Details</a></button>
+
+    {% endfor %}
+</body>
+</html>

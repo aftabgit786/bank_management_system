@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bank Login</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <form method="post" action="">
+            {% csrf_token %}
+            <h1>Log in to Bank</h1>
+            <input type="text" name="username" placeholder="Email or Phone Number">
+            <input type="password" name="password" placeholder="Password">
+            <button type="submit">Log In</button>
+            <p><a href="#">Forgot Password?</a></p>
+            <hr>
+            <p><a href="/function">Create New Account</a></p>
+        </form>
+    </div>
+</body>
+
+</html>
