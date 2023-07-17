@@ -9,6 +9,5 @@ class GetBankAccount(TemplateView):
     def get(self, request, bank_id):
         user = request.user
         accounts_data = Account.objects.filter(user=user, bank_id=bank_id)
-        total_accounts = accounts_data.count()
 
-        return self.render_to_response({'accounts': accounts_data, 'total_accounts': total_accounts})
+        return self.render_to_response({'accounts': accounts_data})
