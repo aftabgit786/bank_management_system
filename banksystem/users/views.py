@@ -46,6 +46,7 @@ class LoginPage(TemplateView):
 
             if user:
                 login(request, user)
+
                 return redirect('banks-class')
 
             return HttpResponse('Invalid username or password')
