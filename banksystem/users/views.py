@@ -6,7 +6,7 @@ from .models import User
 
 
 class SignupPage(TemplateView):
-    template_name = 'class/signup.html'
+    template_name = 'class_based/signup.html'
 
     def post(self, request):
         firstname = request.POST.get('firstname', '')
@@ -35,7 +35,7 @@ class SignupPage(TemplateView):
 
 
 class LoginPage(TemplateView):
-    template_name = 'class/login.html'
+    template_name = 'class_based/login.html'
 
     def post(self, request):
         username = request.POST.get("username")
@@ -82,7 +82,7 @@ def signup_page(request):
 
         return HttpResponse('Please provide all fields')
 
-    return render(request, 'function/signup.html')
+    return render(request, 'function_based/signup.html')
 
 
 def login_page(request):
@@ -102,4 +102,4 @@ def login_page(request):
 
         return HttpResponse('Please provide both username and password')
 
-    return render(request, 'function/login.html')
+    return render(request, 'function_based/login.html')
