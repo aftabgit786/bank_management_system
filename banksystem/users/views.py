@@ -1,105 +1,40 @@
-from django.contrib.auth import authenticate, login
-from django.shortcuts import HttpResponse, redirect, render
+from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
-from .models import User
+from .forms import signup_form, login_form
 
 
 class SignupPage(TemplateView):
     template_name = 'class_based/signup.html'
 
     def post(self, request):
-        firstname = request.POST.get('firstname', '')
-        lastname = request.POST.get('lastname', '')
-        username = request.POST.get('username', '')
-        password = request.POST.get('password', '')
-        email = request.POST.get('email', '')
-        dob = request.POST.get('dob', '')
-        city = request.POST.get('city', '')
+        signup_form(request)
 
-        if all([firstname, lastname, username, password, email, dob, city]):
-            user = User.objects.create_user(
-                first_name=firstname,
-                last_name=lastname,
-                username=username,
-                email=email,
-                password=password,
-                dob=dob,
-                city=city
-            )
-            user.save()
-
-            return redirect('login-class')
-
-        return HttpResponse('Please provide all fields')
+        return redirect('login-class')
 
 
 class LoginPage(TemplateView):
     template_name = 'class_based/login.html'
 
     def post(self, request):
-        username = request.POST.get("username")
-        password = request.POST.get("password")
+        login_form(request)
 
-        if username and password:
-            user = authenticate(request, username=username, password=password)
-
-            if user:
-                login(request, user)
-
-                return redirect('banks-class')
-
-            return HttpResponse('Invalid username or password')
-
-        return HttpResponse('Please provide both username and password')
+        return redirect('banks-class')
 
 
 def signup_page(request):
     if request.method == "POST":
-        firstname = request.POST.get('firstname', '')
-        lastname = request.POST.get('lastname', '')
-        username = request.POST.get('username', '')
+        signup_form(request)
 
-        password = request.POST.get('password', '')
-
-        email = request.POST.get('email', '')
-        dob = request.POST.get('dob', '')
-        city = request.POST.get('city', '')
-
-        if all([firstname, lastname, username, password, email, dob, city]):
-            user = User.objects.create_user(
-                first_name=firstname,
-                last_name=lastname,
-                username=username,
-                email=email,
-                password=password,
-                dob=dob,
-                city=city
-            )
-            user.save()
-
-            return redirect('login-function')
-
-        return HttpResponse('Please provide all fields')
+        return redirect('login-function')
 
     return render(request, 'function_based/signup.html')
 
 
 def login_page(request):
     if request.method == 'POST':
-        username = request.POST.get("username")
-        password = request.POST.get("password")
+        login_form(request)
 
-        if username and password:
-            user = authenticate(request, username=username, password=password)
-
-            if user:
-                login(request, user)
-
-                return redirect('banks-function')
-
-            return HttpResponse('Invalid username or password')
-
-        return HttpResponse('Please provide both username and password')
+        return redirect('banks-function')
 
     return render(request, 'function_based/login.html')

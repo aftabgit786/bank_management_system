@@ -1,10 +1,10 @@
 from django.urls import path
 
-from .views import *
+from . import views
 
 
 urlpatterns = [
-    path('<int:bank_id>/class', GetBankAccount.as_view(), name='accounts-class'),
-    path('<int:bank_id>/function', get_bank_accounts, name='accounts-function'),
+    path('<int:bank_id>/class/', views.GetBankAccount.as_view(), name='accounts-class'),
+    path('<int:bank_id>/function/', views.get_bank_accounts, name='accounts-function'),
 
 ]

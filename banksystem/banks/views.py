@@ -1,22 +1,20 @@
-from django.db.models import Count
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from .models import Bank
+from .utils import get_user_banks
 
 
 class GetBanks(TemplateView):
     template_name = 'class_based/banks.html'
 
-    def get(self, request):
-        user = request.user
-        get_context_data = Bank.objects.filter(bank_accounts__user=user).annotate(accounts_count=Count('bank_accounts'))
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["banks"] = get_user_banks(self.request)
 
-        return self.render_to_response({'banks': get_context_data})
+        return context
 
 
 def get_banks(request):
-    user = request.user
-    get_context_data = Bank.objects.filter(bank_accounts__user=user).annotate(accounts_count=Count('bank_accounts'))
+    context = get_user_banks(request)
 
-    return render(request, 'function_based/banks.html', {'banks': get_context_data})
+    return render(request, 'function_based/banks.html', {'banks': context})
