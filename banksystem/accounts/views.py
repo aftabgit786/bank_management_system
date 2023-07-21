@@ -1,11 +1,11 @@
-# import logging
+import logging
 
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from .utils import get_user_bank_accounts
 
-# logger = logging.getLogger('Django')
+logger = logging.getLogger('Django')
 
 
 class GetBankAccount(TemplateView):
