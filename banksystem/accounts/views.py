@@ -24,4 +24,3 @@ def get_bank_accounts(request, bank_id):
     user_account_context = get_user_bank_accounts(request, bank_id)
 
     return render(request, 'accounts.html', {'accounts': user_account_context})
-
