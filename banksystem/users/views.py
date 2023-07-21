@@ -1,7 +1,11 @@
+import logging
+
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
 from .forms import signup_form, login_form
+
+logger = logging.getLogger('Django')
 
 
 class SignupPage(TemplateView):

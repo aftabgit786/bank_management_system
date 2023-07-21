@@ -1,7 +1,11 @@
+# import logging
+
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from .utils import get_user_bank_accounts
+
+# logger = logging.getLogger('Django')
 
 
 class GetBankAccount(TemplateView):
@@ -20,3 +24,4 @@ def get_bank_accounts(request, bank_id):
     user_account_context = get_user_bank_accounts(request, bank_id)
 
     return render(request, 'accounts.html', {'accounts': user_account_context})
+
