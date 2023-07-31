@@ -1,22 +1,23 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .utils import get_user_bank_accounts
+from .serializer import AccountSerializer
 
 
-class GetBankAccount(TemplateView):
-    template_name = 'accounts.html'
+class GetBankAccount(APIView):
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
+    def get(self, *args, **kwargs):
         bank_id = self.kwargs.get('bank_id')
-        context["accounts"] = get_user_bank_accounts(self.request, bank_id=bank_id)
+        accounts = get_user_bank_accounts(self.request, bank_id=bank_id)
+        serializer = AccountSerializer(accounts, many=True)
+        return Response({'accounts': serializer.data})
 
-        return context
 
-
+@api_view(['GET'])
 def get_bank_accounts(request, bank_id):
     user_account_context = get_user_bank_accounts(request, bank_id)
+    serializer = AccountSerializer(user_account_context, many=True)
 
-    return render(request, 'accounts.html', {'accounts': user_account_context})
+    return Response({'accounts': serializer.data})
