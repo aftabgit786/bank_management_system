@@ -1,30 +1,22 @@
 from rest_framework import generics
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import PermissionDenied
 
 from .models import Account
 from .serializer import AccountSerializer
 
 
-class GetBankAllAccountAPIView(generics.ListAPIView):
+class BankListAPIView(generics.ListAPIView):
     serializer_class = AccountSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        user_accounts = Account.objects.filter(user=self.request.user)
-
-        return user_accounts
+        return Account.objects.filter(user=self.request.user)
 
 
-class GetBankAccountViaIdsAPIView(generics.RetrieveAPIView):
+class BankDetailAPIView(generics.RetrieveAPIView):
     serializer_class = AccountSerializer
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        try:
-            accounts = Account.objects.get(pk=self.kwargs['pk'], user=self.request.user)
-
-            return accounts
-
-        except Account.DoesNotExist:
-            raise PermissionDenied("You do not have permission to access this account.")
+        return get_object_or_404(Account, pk=self.kwargs['pk'], user=self.request.user)
