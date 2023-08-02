@@ -1,23 +1,30 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
 
-from .utils import get_user_bank_accounts
+from .models import Account
 from .serializer import AccountSerializer
 
 
-class GetBankAccount(APIView):
-    def get(self, *args, **kwargs):
-        bank_id = self.kwargs.get('bank_id')
-        accounts = get_user_bank_accounts(self.request, bank_id=bank_id)
-        serializer = AccountSerializer(accounts, many=True)
+class GetBankAccountAllAPIView(generics.ListAPIView):
+    serializer_class = AccountSerializer
+    permission_classes = [IsAuthenticated]
 
-        return Response({'accounts': serializer.data})
+    def get_queryset(self):
+        user_accounts = Account.objects.filter(user=self.request.user)
+
+        return user_accounts
 
 
-@api_view(['GET'])
-def get_bank_accounts(request, bank_id):
-    user_account_context = get_user_bank_accounts(request, bank_id)
-    serializer = AccountSerializer(user_account_context, many=True)
+class GetBankAccountViaIdsAPIView(generics.RetrieveAPIView):
+    serializer_class = AccountSerializer
+    permission_classes = [IsAuthenticated]
 
-    return Response({'accounts': serializer.data})
+    def get_object(self):
+        user = self.request.user
+        pk = self.kwargs['pk']
+        try:
+            accounts = Account.objects.get(pk=pk, user=user)
+            return accounts
+        except Account.DoesNotExist:
+            raise PermissionDenied("You do not have permission to access this account.")

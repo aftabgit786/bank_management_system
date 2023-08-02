@@ -1,22 +1,17 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from django.db.models import Count
+from rest_framework import generics
+from rest_framework.permissions import IsAdminUser
 
-from .utils import get_user_banks
 from .serializer import BankSerializer
+from .models import Bank
 
 
-class GetBanks(APIView):
-    def get(self, *args, **kwargs):
-        user_banks = get_user_banks(self.request)
-        serializer = BankSerializer(user_banks, many=True)
+class GetBanksAPIView(generics.ListAPIView):
+    serializer_class = BankSerializer
+    permission_classes = [IsAdminUser]
 
-        return Response({'banks': serializer.data})
+    def get_queryset(self):
+        user = self.request.user
+        user_banks = Bank.objects.filter(bank_accounts__user=user).annotate(accounts_count=Count('bank_accounts'))
 
-
-@api_view(['GET'])
-def get_banks(request):
-    user_banks = get_user_banks(request)
-    serializer = BankSerializer(user_banks, many=True)
-
-    return Response({'banks': serializer.data})
+        return user_banks
