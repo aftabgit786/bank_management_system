@@ -4,5 +4,5 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.GetBanksAPIView.as_view(), name='banks-class'),
+    path('', views.GetBanksAPIView.as_view(), name='banks'),
 ]
