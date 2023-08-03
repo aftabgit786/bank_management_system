@@ -1,23 +1,22 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
 
-from .utils import get_user_bank_accounts
+from .models import Account
 from .serializer import AccountSerializer
 
 
-class GetBankAccount(APIView):
-    def get(self, *args, **kwargs):
-        bank_id = self.kwargs.get('bank_id')
-        accounts = get_user_bank_accounts(self.request, bank_id=bank_id)
-        serializer = AccountSerializer(accounts, many=True)
+class BankListAPIView(generics.ListAPIView):
+    serializer_class = AccountSerializer
+    permission_classes = [IsAuthenticated]
 
-        return Response({'accounts': serializer.data})
+    def get_queryset(self):
+        return Account.objects.filter(user=self.request.user)
 
 
-@api_view(['GET'])
-def get_bank_accounts(request, bank_id):
-    user_account_context = get_user_bank_accounts(request, bank_id)
-    serializer = AccountSerializer(user_account_context, many=True)
+class BankDetailAPIView(generics.RetrieveAPIView):
+    serializer_class = AccountSerializer
+    permission_classes = [IsAuthenticated]
 
-    return Response({'accounts': serializer.data})
+    def get_object(self):
+        return get_object_or_404(Account, pk=self.kwargs['pk'], user=self.request.user)

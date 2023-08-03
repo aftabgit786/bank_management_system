@@ -7,7 +7,7 @@
     <h1>You Have These Bank Accounts</h1>
     {% for bank in banks %}
         <h2>{{ bank.name }} ({{ bank.accounts_count }} Accounts)</h2>
-        <button><a href="{% url 'accounts-function' bank_id=bank.id %}">Details</a></button>
+        <button><a href="{% url 'accounts' bank_id=bank.id %}">Details</a></button>
 
     {% endfor %}
 </body>
