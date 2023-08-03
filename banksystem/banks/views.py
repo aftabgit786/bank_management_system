@@ -6,7 +6,7 @@ from .serializer import BankSerializer
 from .models import Bank
 
 
-class GetBanksAPIView(generics.ListAPIView):
+class BankListAPIView(generics.ListAPIView):
     serializer_class = BankSerializer
     permission_classes = [IsAdminUser]
 
