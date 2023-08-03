@@ -1,6 +1,5 @@
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
-from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
 from .models import Account
 from .pagination import AdminResultsPagination
@@ -11,7 +10,6 @@ from .permissions import MyCustomPermission
 class BankListAPIView(generics.ListAPIView):
     serializer_class = AccountSerializer
     permission_classes = [MyCustomPermission]
-    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
     def get_queryset(self):
         return Account.objects.filter(user=self.request.user)
@@ -20,7 +18,6 @@ class BankListAPIView(generics.ListAPIView):
 class BankDetailAPIView(generics.RetrieveAPIView):
     serializer_class = AccountSerializer
     permission_classes = [MyCustomPermission]
-    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
     def get_object(self):
         return get_object_or_404(Account, pk=self.kwargs['pk'], user=self.request.user)
@@ -29,7 +26,6 @@ class BankDetailAPIView(generics.RetrieveAPIView):
 class AdminBankListAPIView(generics.ListAPIView):
     serializer_class = AccountSerializer
     pagination_class = AdminResultsPagination
-    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
     def get_queryset(self):
         queryset = Account.objects.all()
