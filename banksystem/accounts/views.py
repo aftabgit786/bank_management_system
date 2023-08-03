@@ -30,6 +30,6 @@ class AdminBankListAPIView(generics.ListAPIView):
     def get_queryset(self):
         queryset = Account.objects.all()
         user_id = self.request.query_params.get('user', None)
-        if user_id:
+        if user_id is not None:
             queryset = queryset.filter(user_id=user_id)
         return queryset
