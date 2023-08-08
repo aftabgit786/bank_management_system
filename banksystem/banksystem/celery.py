@@ -14,12 +14,10 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'execute-task-after-login': {
         'task': 'users.tasks.add',
-        'schedule': timedelta(seconds=10),
+        'schedule': timedelta(seconds=60),
         'args': (12345678, 12345678),
     },
 }
-
-app.conf.beat_schedule_filename = "banksystem/celerybeat-schedule"
 
 
 @app.task(bind=True)
