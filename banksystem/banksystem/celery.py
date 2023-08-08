@@ -1,5 +1,5 @@
 import os
-from datetime import timedelta
+from celery.schedules import crontab
 
 from celery import Celery
 
@@ -14,7 +14,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'execute-task-after-login': {
         'task': 'users.tasks.add',
-        'schedule': timedelta(seconds=60),
+        'schedule': crontab(minute='*/15'),
         'args': (12345678, 12345678),
     },
 }
