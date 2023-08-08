@@ -1,7 +1,8 @@
 import os
-from celery.schedules import crontab
 
 from celery import Celery
+from celery.schedules import crontab
+
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'banksystem.settings')
 
@@ -14,7 +15,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'execute-task-after-login': {
         'task': 'users.tasks.add',
-        'schedule': crontab(minute='*/15'),
+        'schedule': crontab(),
         'args': (12345678, 12345678),
     },
 }
